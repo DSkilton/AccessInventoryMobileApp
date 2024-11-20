@@ -12,20 +12,18 @@ public class SimpleHttpService {
         
         System.out.println("Server started at http://localhost:" + port);
         
-        registerEndPoints();
+        registerEndPoints(); // calls our registerEndPoints method on line 24
         server.setExecutor(null);
-        server.start();
+        server.start(); // starts the server
     }    
     
     public static void stopServer() {
-        server.stop(0);
+        server.stop(0); // stops the server 
     }
     
     private static void registerEndPoints() {
         //this is where we can add our web end points
-        server.createContext("/hello", new HelloHandler());
-        server.createContext("/item", new ItemsHandler());
-        server.createContext("/student", new StudentHandler());
-        server.createContext("/", new StaticPageHandler());
+        server.createContext("/item", new ItemsHandler()); 
+        server.createContext("/", new StaticPageHandler()); //sets localhost:8081 to the web page on StaticHandler
     }
 }
