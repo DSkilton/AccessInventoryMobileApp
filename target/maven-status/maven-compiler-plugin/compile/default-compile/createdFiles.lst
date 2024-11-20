@@ -1,0 +1,6 @@
+com\mycompany\simplewebapp\SimpleHttpService.class
+com\mycompany\simplewebapp\HelloHandler.class
+com\mycompany\simplewebapp\StaticPageHandler.class
+com\mycompany\simplewebapp\StudentHandler.class
+com\mycompany\simplewebapp\ItemsHandler.class
+com\mycompany\simplewebapp\SimpleWebApp.class
