@@ -1,11 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.simplewebapp;
 
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
+
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
@@ -13,10 +10,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-/**
- *
- * @author Student
- */
 public class ItemsHandler implements HttpHandler {
 
     private static Map<String, Integer> items = new HashMap<>();
@@ -31,12 +24,13 @@ public class ItemsHandler implements HttpHandler {
         } else if ("DELETE".equalsIgnoreCase(requestMethod)) {
             handleDeleteRequest(exchange);
         } else {
-            exchange.sendResponseHeaders(405, -1); // Method Not Allowed
+            exchange.sendResponseHeaders(405, -1); // Method not allowed
         }
     }
 
     private void handleGetRequest(HttpExchange exchange) throws IOException {
-        String response = items.entrySet().stream()
+        String response = items.entrySet()
+                .stream()
                 .map(entry -> "\"" + entry.getKey() + "\":" + entry.getValue())
                 .collect(Collectors.joining(", ", "{", "}"));
         exchange.sendResponseHeaders(200, response.getBytes(StandardCharsets.UTF_8).length);
@@ -54,7 +48,7 @@ public class ItemsHandler implements HttpHandler {
             items.put(itemName, items.getOrDefault(itemName, 0) + qty);
             exchange.sendResponseHeaders(201, -1); // Created
         } else {
-            exchange.sendResponseHeaders(400, -1); // Bad Request
+            exchange.sendResponseHeaders(400, -1); // Bad request
         }
     }
 
@@ -65,7 +59,7 @@ public class ItemsHandler implements HttpHandler {
             items.remove(itemName);
             exchange.sendResponseHeaders(200, -1); // OK
         } else {
-            exchange.sendResponseHeaders(404, -1); // Not Found
+            exchange.sendResponseHeaders(404, -1); // Not found
         }
     }
 }
